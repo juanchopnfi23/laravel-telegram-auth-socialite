@@ -11,21 +11,38 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Raiz Bienvenida
+
+Route::get('/', function(){
+	return View('welcome');
 });
 
-Auth::routes();
+// Home
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'Web\HomeController@index')->name('home');
 
-Route::group(['middleware' => ['auth']], function()
-{
+// Rutas Auth
+Route::group(['middleware' => ['auth']], function(){
 
-    Route::get('/users', function()
-    {
-    	$users = App\User::all();
-       	return view('users',compact('users'));
-    });
+	Route::resource('users', 'Web\UsersController');
+   	Route::resource('posts', 'Web\PostsController');
+   	Route::resource('comments', 'Web\CommentsController');
 
 });
+
+// Authentication Routes...
+Route::get('login', 'Web\Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Web\Auth\LoginController@login');
+Route::post('logout', 'Web\Auth\LoginController@logout')->name('logout');
+
+// Registration Routes...
+Route::get('register', 'Web\Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Web\Auth\RegisterController@register');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Web\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Web\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Web\Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Web\Auth\ResetPasswordController@reset');
+
+
