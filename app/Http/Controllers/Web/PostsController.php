@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Auth;
+use Telegram;
 use App\Post;
 class PostsController extends Controller
 {
@@ -57,6 +58,12 @@ class PostsController extends Controller
         }
 
         Session::flash('flash_message', 'Done, post added!');
+        // enviar mensaje a telegram
+        $mensaje_telegram = 'Hola , Puede que te interese. El usuario ' . Auth::user()->name . ' ha creado un nuevo post .. Titulo del post : ' . $newPost->title . ' Saludos desde el blog.';
+        $response = Telegram::sendMessage([
+          'chat_id' => '-190334946', 
+          'text' => $mensaje_telegram
+        ]);
 
         return redirect('posts');
     }

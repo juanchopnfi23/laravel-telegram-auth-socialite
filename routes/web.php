@@ -46,3 +46,20 @@ Route::get('password/reset/{token}', 'Web\Auth\ResetPasswordController@showReset
 Route::post('password/reset', 'Web\Auth\ResetPasswordController@reset');
 
 
+Route::get('tel',function(){
+	// obtener informacion
+	$response = Telegram::getMe();
+
+	$botId = $response->getId();
+	$firstName = $response->getFirstName();
+	$username = $response->getUsername();
+	
+	// enviar mensaje
+	$response = Telegram::sendMessage([
+	  'chat_id' => '-190334946', 
+	  'text' => 'Hello , i am the bot of juan'
+	]);
+
+	$messageId = $response->getMessageId();
+	return response($response);
+});
