@@ -45,7 +45,11 @@ Route::post('password/email', 'Web\Auth\ForgotPasswordController@sendResetLinkEm
 Route::get('password/reset/{token}', 'Web\Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Web\Auth\ResetPasswordController@reset');
 
+// auth socialite
 
+Route::get('/oauth/{provider}', 'Web\Auth\SocialAuthController@redirectToProvider');
+Route::get('/oauth/{provider}/callback', 'Web\Auth\SocialAuthController@handleProviderCallback');
+// probando telegram
 Route::get('tel',function(){
 	// obtener informacion
 	$response = Telegram::getMe();

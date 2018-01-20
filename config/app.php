@@ -178,8 +178,10 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 
-
-        Telegram\Bot\Laravel\TelegramServiceProvider::class
+        // telegram
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        //socialite
+         Overtrue\LaravelSocialite\ServiceProvider::class,
 
     ],
 
@@ -230,7 +232,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class
+
+        // telegram
+        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class,
+        // socialite
+        'Socialite' => Overtrue\LaravelSocialite\Socialite::class,
 
     ],
 

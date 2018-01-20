@@ -51,14 +51,34 @@
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-default">
                                     Login
                                 </button>
+                 
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+<a class="btn btn-primary" href="{{ url('/oauth/facebook') }}">
+    Facebook
+</a>
+
+<a class="btn btn-success" href="{{ url('/oauth/github') }}">
+    Github
+</a>
+
+<a class="btn btn-danger" href="{{ url('/oauth/google') }}">
+    Google
+</a>
+
+                                
+                            </div>
+
+                             <div class="col-md-8 col-md-offset-4">
+                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>
+                                
                             </div>
+
+                           
                         </div>
                     </form>
                 </div>
